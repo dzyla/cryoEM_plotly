@@ -11,7 +11,7 @@ def open_mrcs_file(file_path):
         return mrc_stack.data
 
 #open the MRC or map file
-data = np.array(open_mrcs_file('EMD-6240.map'))
+data = np.array(open_mrcs_file('emd_7770.map'))
 
 
 #plot histogram of the intesities to see the data range
@@ -39,9 +39,3 @@ fig = ff.create_trisurf(x=verts[:, 2],
 
 #plot the figure and show it in the browser
 plotly.offline.plot(fig)
-
-# plotly.tools.set_credentials_file(username='didny1', api_key='abAJCDDjiEUt9G46KBce')
-# lvl = 0.1
-# itemindex = np.where(np.logical_and(data>130, data<=131))
-# trace = go.Mesh3d(x=verts[0],y=verts[1],z=verts[2],color='#FFB6C1')
-# plotly.offline.plot([trace])
