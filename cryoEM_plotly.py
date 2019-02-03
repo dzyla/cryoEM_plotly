@@ -11,7 +11,9 @@ def open_mrcs_file(file_path):
         return mrc_stack.data
 
 #open the MRC or map file
-data = np.array(open_mrcs_file('emd_7770.map'))
+file_path = 'emd_7770.map'
+
+data = np.array(open_mrcs_file(file_path))
 
 
 #plot histogram of the intesities to see the data range
