@@ -11,7 +11,7 @@ def open_mrcs_file(file_path):
         return mrc_stack.data
 
 #open the MRC or map file
-file_path = 'emd_7770.map'
+file_path = 'EMD-6240.map'
 
 data = np.array(open_mrcs_file(file_path))
 
@@ -27,17 +27,24 @@ lvl = float(input('level: '))
 #find the vertises and faces
 verts, faces, normals, values = measure.marching_cubes_lewiner(data, level=lvl)
 
+#Set the color of the surface based on the faces order. Here you can provide your own colouring
+color = np.zeros(len(faces))
+color[0] = 1  # because there has to be a colour range, 1st element is 1
+color = list(color) #change numpy array to list
+
 #create a plotly trisurf figure
 fig = ff.create_trisurf(x=verts[:, 2],
                         y=verts[:, 1],
                         z=verts[:, 0],
                         plot_edges=False,
+                        color_func=color,
                         simplices=faces,
-                        gridcolor='rgb(255, 255, 255)',
-                        zerolinecolor='rgb(255, 255, 255)',
                         showbackground=False,
-                        show_colorbar=False,
-                        edges_color='rgb(255,255,255')
+                        show_colorbar=False
+                        )
+
+#remove axes
+fig['layout'].update(scene = dict(xaxis = dict(visible=False),yaxis = dict(visible=False),zaxis = dict(visible=False)))
 
 #plot the figure and show it in the browser
 plotly.offline.plot(fig)
